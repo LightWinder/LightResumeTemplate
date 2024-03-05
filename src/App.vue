@@ -1,58 +1,36 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import BaseInfo from './components/BaseInfo.vue'
-import Flow from './components/Flow.vue'
-import data from './data2.json'
+import { ref } from 'vue'
+import datas from './data/defaultDatas.json'
+import ResumeBody from './components/ResumeBody.vue'
+import type { ResumeBodyProps } from 'src/types/resumeCard'
+import OperationPanel from './components/OperationPanel.vue'
 
-const sourceData = ref(data)
+const jsonDatasDefault = datas as ResumeBodyProps[]
+const defaultDatas = ref(jsonDatasDefault)
 
-const baseDataKey = ['name', 'age', 'job', 'description', 'avatar', 'location', 'email', 'phone']
-const baseData = computed(() => {
-  return baseDataKey.reduce(
-    (item: Record<string, any>, key: string) => {
-      if (key in sourceData.value) {
-        item[key] = (sourceData.value as Record<string, unknown>)[key]
-      }
-      return item
-    },
-    {} as Record<string, any>
-  )
-})
+const activeItem = ref(0)
+
+const changeActive = (index: number) => {
+  activeItem.value = index
+  console.log(activeItem.value)
+}
 </script>
 
 <template>
-  <div id="resume">
-    <div class="flex flex-col gap-[2.05rem]">
-      <BaseInfo v-bind="baseData" />
-      <div class="flex flex-col gap-[2.05rem]">
-        <div class="flex flex-col" v-for="item in sourceData.dataGroup" :key="item.title">
-          <h2 class="title">{{ item.title }}</h2>
-          <Flow v-if="item.type === 'flow'" :data="item.data" />
-          <span v-else-if="item.type === 'text'" class="pt-[1rem]">
-            <template v-if="typeof item.description === 'string'">
-              <!-- <p>{{ item.description }}</p> -->
-            </template>
-            <template v-else-if="Array.isArray(item.description)">
-              <p v-for="desc in item.description">{{ desc }}</p>
-            </template>
-          </span>
-        </div>
-      </div>
+  <div class="flex gap-4 w-full p-4 print:p-0">
+    <div class="">
+      <ResumeBody v-bind="defaultDatas[activeItem]" />
     </div>
+  </div>
+  <div
+    class="fixed right-0 h-screen flex flex-1 bg-[#ffffff] p-4 print:hidden border-l-solid border-l-1 border-l-[#eaeaea]"
+  >
+    <OperationPanel
+      :resume-datas="defaultDatas"
+      :active-item="activeItem"
+      @changeActive="changeActive"
+    />
   </div>
 </template>
 
-<style scoped>
-#resume {
-  min-height: 168rem;
-  width: 119rem;
-  background: white;
-  display: flex;
-  flex-direction: column;
-  padding: 4rem;
-  gap: 2rem;
-  position: relative;
-  overflow: hidden;
-  font-size: 0;
-}
-</style>
+<style scoped></style>

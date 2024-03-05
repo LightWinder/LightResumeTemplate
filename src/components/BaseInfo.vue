@@ -6,14 +6,13 @@ interface BaseInfoProps {
   avatar: string
   name: string
   age: number
-  job: string
+  subInfo: string | string[] | null
   description: string | string[] | null
   location: string
   email: string
   phone: string
 }
-const { avatar, age, name, job, description, location, email, phone } =
-  defineProps<Partial<BaseInfoProps>>()
+const { avatar, name, subInfo, location, email, phone } = defineProps<Partial<BaseInfoProps>>()
 </script>
 
 <template>
@@ -21,7 +20,11 @@ const { avatar, age, name, job, description, location, email, phone } =
     <img class="avatar-box" :src="avatar" />
     <div class="flex-1">
       <h1>{{ name }}</h1>
-      <h2>{{ job }} ({{ age }}岁)</h2>
+      <div class="flex gap-[1.25rem] justify-start">
+        <h2 class="w-auto" :key="item" v-for="item in subInfo">
+          {{ item }}
+        </h2>
+      </div>
     </div>
     <div class="flex flex-col gap-[1rem]">
       <div class="flex item-center">
