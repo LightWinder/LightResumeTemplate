@@ -1,0 +1,91 @@
+{
+  "name": "约翰·杜",
+  "age": 28,
+  "job": "Web前端开发者",
+  "avatar": "https://new-url.com/rookie-avatar.jpg",
+  "location": "旧金山",
+  "email": "johndoe@example.com",
+  "phone": "9876543210",
+  "dataGroup": [
+    {
+      "type": "text",
+      "title": "个人介绍",
+      "description": [
+        "1. 有使用React、Vue和Angular开发web应用的经验。",
+        "2. 熟练使用Bootstrap和Material-UI等UI库。",
+        "3. 熟悉Axios等前端库处理HTTP请求。",
+        "4. 对前端路由和状态管理有良好的理解。",
+        "5. 基本的后端开发技能，有Node.js和Express.js的经验。",
+        "6. 熟悉常见的数据结构和算法。"
+      ]
+    },
+    {
+      "type": "flow",
+      "title": "教育经历",
+      "data": [
+        {
+          "title": "斯坦福大学",
+          "info": "计算机科学 GPA( 3.8 / 4.0 )",
+          "startTime": "2014",
+          "endTime": "2018",
+          "description": [
+            "主修课程：数据结构、算法、Web开发、数据库系统",
+            "成就：院长名单，通过TOEFL和GRE"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "flow",
+      "title": "项目经验",
+      "data": [
+        {
+          "title": "电子商务网站",
+          "info": "前端开发者",
+          "startTime": "2020",
+          "endTime": "现在",
+          "description": [
+            "技术栈：React + Redux + Bootstrap",
+            "项目描述：一个具有产品列表、购物车和用户认证功能的电子商务网站。",
+            "主要工作：实现了网站的前端部分，包括产品列表页、购物车和用户认证。"
+          ]
+        },
+        {
+          "title": "社交媒体应用",
+          "info": "全栈开发者",
+          "startTime": "2019",
+          "endTime": "2020",
+          "description": [
+            "技术栈：Vue + Vuex + Vuetify",
+            "项目描述：一个具有帖子创建、点赞、评论和用户个人资料功能的社交媒体应用。",
+            "主要工作：实现了应用的前端和后端，包括帖子创建、点赞、评论和用户个人资料。"
+          ]
+        },
+        {
+          "title": "任务管理应用",
+          "info": "后端开发者",
+          "startTime": "2018",
+          "endTime": "2019",
+          "description": [
+            "技术栈：Node.js + Express.js + MongoDB",
+            "项目描述：一个具有任务创建、任务分配和任务状态跟踪功能的任务管理应用。",
+            "主要工作：实现了应用的后端部分，包括任务创建、任务分配和任务状态跟踪。"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "flow",
+      "title": "工作经验",
+      "data": [
+        {
+          "title": "XYZ科技公司",
+          "info": "前端开发者",
+          "startTime": "2018",
+          "endTime": "2020",
+          "description": "使用React和Vue开发和维护了几个web应用。也负责使用Node.js和Express.js进行一些后端工作。"
+        }
+      ]
+    }
+  ]
+}
