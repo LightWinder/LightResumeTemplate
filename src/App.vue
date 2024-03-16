@@ -1,36 +1,60 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import datas from './data/defaultDatas.json'
 import ResumeBody from './components/ResumeBody.vue'
+import SideBar from './components/SideBar.vue'
 import type { ResumeBodyProps } from 'src/types/resumeCard'
 import OperationPanel from './components/OperationPanel.vue'
 
-const jsonDatasDefault = datas as ResumeBodyProps[]
+let jsonDatasDefault = datas as ResumeBodyProps[]
 const defaultDatas = ref(jsonDatasDefault)
+const addtionalDatas = ref<ResumeBodyProps[]>([])
+const activedResume = ref(0)
+const resumeDatas = computed<ResumeBodyProps[]>(() => {
+  return [...defaultDatas.value, ...addtionalDatas.value]
+})
 
-const activeItem = ref(0)
+onMounted(() => {
+  refreshResume()
+  console.log(addtionalDatas.value)
+})
 
 const changeActive = (index: number) => {
-  activeItem.value = index
-  console.log(activeItem.value)
+  activedResume.value = index
+  console.log(activedResume.value)
+}
+
+const addResume = (data: ResumeBodyProps) => {
+  addtionalDatas.value.push(data)
+  wiriteStorage()
+}
+
+const refreshResume = () => {
+  const resumeStr = window.localStorage.getItem('resume')
+
+  if (resumeStr == null) return
+  addtionalDatas.value = JSON.parse(resumeStr)
+}
+const wiriteStorage = () => {
+  window.localStorage.setItem('resume', JSON.stringify(addtionalDatas.value))
 }
 </script>
 
 <template>
   <div class="flex gap-4 w-full p-4 print:p-0">
     <div class="">
-      <ResumeBody v-bind="defaultDatas[activeItem]" />
+      <ResumeBody v-bind="resumeDatas[activedResume]" />
     </div>
   </div>
-  <div
-    class="fixed right-0 h-screen flex flex-1 bg-[#ffffff] p-4 print:hidden border-l-solid border-l-1 border-l-[#eaeaea]"
-  >
+  <SideBar>
     <OperationPanel
-      :resume-datas="defaultDatas"
-      :active-item="activeItem"
+      :resume-datas="resumeDatas"
+      :active-item="activedResume"
       @changeActive="changeActive"
+      @addResume="addResume"
     />
-  </div>
+  </SideBar>
 </template>
 
 <style scoped></style>
+./components/OperationPanel/OperationPanel.vue

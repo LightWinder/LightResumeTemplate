@@ -38,7 +38,7 @@ const baseData = computed(() => {
           <Flow v-if="item.type === 'flow'" :data="item.data" />
           <span v-else-if="item.type === 'text'" class="pt-[1rem]">
             <template v-if="typeof item.description === 'string'">
-              <!-- <p>{{ item.description }}</p> -->
+              <p>{{ item.description }}</p>
             </template>
             <template v-else-if="Array.isArray(item.description)">
               <p :key="desc" v-for="desc in item.description">{{ desc }}</p>
